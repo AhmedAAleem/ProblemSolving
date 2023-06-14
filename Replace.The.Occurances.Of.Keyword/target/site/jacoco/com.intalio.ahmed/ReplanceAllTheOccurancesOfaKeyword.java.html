@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReplanceAllTheOccurancesOfaKeyword.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FileOperations</a> &gt; <a href="index.source.html" class="el_package">com.intalio.ahmed</a> &gt; <span class="el_source">ReplanceAllTheOccurancesOfaKeyword.java</span></div><h1>ReplanceAllTheOccurancesOfaKeyword.java</h1><pre class="source lang-java linenums">package com.intalio.ahmed;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+<span class="fc" id="L12">public class ReplanceAllTheOccurancesOfaKeyword {</span>
+<span class="fc" id="L13">	final static Logger LOGGER = Logger.getLogger(ReplanceAllTheOccurancesOfaKeyword.class.getName());</span>
+
+	public static char[] ReadFileToCharArray(String filePath) throws IOException {
+<span class="fc" id="L16">		StringBuilder fileData = new StringBuilder(1000);</span>
+<span class="fc" id="L17">		BufferedReader reader = new BufferedReader(new FileReader(filePath));</span>
+		// Creates an array of character
+<span class="fc" id="L19">		char[] buf = new char[10];</span>
+		// declare a variable
+<span class="fc" id="L21">		int numRead = 0;</span>
+		// while loop for reading
+<span class="fc bfc" id="L23" title="All 2 branches covered.">		while ((numRead = reader.read(buf)) != -1) {</span>
+//			System.out.println(numRead);
+<span class="fc" id="L25">			String readData = String.valueOf(buf, 0, numRead);</span>
+<span class="fc" id="L26">			fileData.append(readData);</span>
+<span class="fc" id="L27">			buf = new char[1024];</span>
+<span class="fc" id="L28">		}</span>
+		// closing the reader
+<span class="fc" id="L30">		reader.close();</span>
+<span class="fc" id="L31">		LOGGER.log(Level.INFO, &quot;Close the Reader&quot;);</span>
+<span class="fc" id="L32">		return fileData.toString().toCharArray();</span>
+	}
+
+//	public static void main(String[] args) {
+	public boolean replcaement(String FileReaderPath) throws NullPointerException {
+		
+		// declare the variables
+//		String FileReaderPath = &quot;C:\\io\\Read.txt&quot;;
+<span class="fc" id="L40">		String FileWriterPath = &quot;C:\\io\\w.txt&quot;;</span>
+<span class="fc" id="L41">		FileOutputStream fileOutputStream = null;</span>
+<span class="fc" id="L42">		OutputStreamWriter outputStreamWriter = null;</span>
+
+		try {
+			// declare a char variable to read the file
+<span class="fc" id="L46">			char[] array = ReadFileToCharArray(FileReaderPath);</span>
+			// Creates a FileOutputStream
+<span class="fc" id="L48">			fileOutputStream = new FileOutputStream(FileWriterPath);</span>
+			// Creates an OutputStreamWriter and surround it by try with recourses
+<span class="fc" id="L50">			outputStreamWriter = new OutputStreamWriter(fileOutputStream);</span>
+			// converting char to string
+<span class="fc" id="L52">			String stringArray = String.valueOf(array);</span>
+<span class="fc" id="L53">			stringArray.equalsIgnoreCase(stringArray);</span>
+			// Replacement of string to another one
+<span class="fc" id="L55">			stringArray = stringArray.replaceAll(&quot;(?i)ahmed&quot;, &quot;Hossam&quot;);</span>
+			// Print a message for completing the process
+<span class="fc" id="L57">			System.out.println(&quot;the output done successfully&quot;);</span>
+			// writing in the new file
+<span class="fc" id="L59">			outputStreamWriter.write(stringArray);</span>
+<span class="fc" id="L60">			System.out.println(stringArray);</span>
+<span class="fc" id="L61">			return true;</span>
+<span class="fc" id="L62">		} catch (FileNotFoundException e) {</span>
+<span class="fc" id="L63">			LOGGER.log(Level.SEVERE, e.getMessage());</span>
+<span class="pc" id="L64">			return false;</span>
+<span class="nc" id="L65">		} catch (IOException e) {</span>
+<span class="nc" id="L66">			LOGGER.log(Level.SEVERE, e.getMessage());</span>
+<span class="nc" id="L67">			return false;</span>
+		} finally {
+<span class="nc" id="L69">			try {</span>
+				// closing the buffers
+<span class="pc" id="L71">				outputStreamWriter.close();</span>
+<span class="pc" id="L72">				fileOutputStream.close();</span>
+<span class="nc" id="L73">			} catch (IOException e) {</span>
+<span class="nc" id="L74">				LOGGER.log(Level.SEVERE, e.getMessage());</span>
+<span class="nc" id="L75">				return false;</span>
+<span class="pc" id="L76">			}</span>
+		}
+
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
